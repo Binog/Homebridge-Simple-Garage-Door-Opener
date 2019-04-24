@@ -24,7 +24,8 @@
     "homebridge": ">=0.3.0"
   },
   "dependencies": {
-    "rpio": "^0.9.13"
+    "rpio": "^0.9.13",
+    "schema-inspector": "^1.6.8"
   },
   "devDependencies": {},
   "scripts": {}
