@@ -72,13 +72,13 @@ class SimpleGarageDoorOpener {
     inspector.sanitize({
       type: 'number',
       eq: [rpio.INPUT, rpio.OUTPUT],
-      def: rpio.OUTPUT
+      def: rpio.INPUT
     }, this.initialGPIOMode);
 
     inspector.sanitize({
       type: 'number',
       eq: [rpio.HIGH, rpio.LOW],
-      def: rpio.HIGH
+      def: rpio.LOW
     }, this.initialGPIOValue);
 
     inspector.sanitize({
