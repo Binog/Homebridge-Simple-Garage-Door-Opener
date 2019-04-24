@@ -40,6 +40,7 @@ You don't need that much to get started. Just tell Simple Garage Door Opener whi
     "doorSwitchPin": 12,
     "simulateTimeOpening": 15,
     "simulateTimeClosing": 15,
+    "autoClosingMode": "none",
     "autoClosingDelay": 30
 }]
 ```
