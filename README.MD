@@ -63,18 +63,18 @@ You don't need that much to get started. Just tell Simple Garage Door Opener whi
 | GPIOOpenActions     | Actions to perform in order to trigger the garage door. A delay of `GPIOActionDelay` seconds is effective between each action | array  | Array of Objects (see object definition below)                                |    NO    | `[{ "type": "mode", "value": "OUTPUT" }, { "type": "mode", "value": "INPUT" }]` |
 
 
-**autoClosingMode** option:
+autoClosingMode option:
 | Value | Description                                                                                                                                             |
 | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | none  | Autoclosing disabled, nothing will be done                                                                                                              |
 | auto  | Your garage door is self-autoclosing. The `autoClosingDelay` will be then used to give HomeKit an estimation about when your garage door is autoclosing |
-| force | Your garage door is **NOT** self-autoclosing, Homebridge will force closing after `autoClosingDelay` seconds                                            |
+| force | Your garage door is NOT self-autoclosing, Homebridge will force closing after `autoClosingDelay` seconds                                                |
 
-**GPIOOpenActions** option, object definition:
-| Value | Description                                                                                                                                                                                                 |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| type  | Type of action that rpio will perform, possible values are `"mode"` or `"write"`                                                                                                                            |
-| value | Value that will be send to rpio when calling the function defined by `type` above. If `type` is `"mode"`, values can be `"INPUT"` or `"OUTPUT"`. If `type` is `"WRITE"`, values can be `"HIGH"` or `"LOW"`. |
+GPIOOpenActions option, object definition:
+| Value | Description                                                                                                                                                                                                |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type  | Type of action that rpio will perform, possible values are `"mode"` or `"write"`                                                                                                                           |
+| value | Value that will be send to rpio when calling the function defined by `type` above. If `type` is `"mode"`, values can be `"INPUT"` or `"OUTPUT"`. If `type` is `"WRITE"`, values can be `"HIGH"` or `"LOW"` |
 
 #### Misc
 Feel free to give me feedback, create PRs or submit issues, enhancements and bugs.
