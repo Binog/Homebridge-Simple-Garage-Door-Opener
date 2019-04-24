@@ -31,18 +31,49 @@ Clone the latest release [here](https://github.com/danielreiser/Homebridge-Simpl
 
 
 #### Edit the ./homebridge/config.json
-You don't need that much to get started. Just tell Simple Garage Door Opener which GPIO you want to use and you're good to go. (More options available)
+You don't need that much to get started. Just tell Simple Garage Door Opener which GPIO you want to use and you're good to go. (More options available, see next section)
 
 ```
 "accessories": [{
-        "accessory": "SimpleGarageDoorOpener",
-        "name": "SimpleGarageDoorOpener",
-        "doorSwitchPin": 12,
-        "simulateTimeOpening": 15,
-        "simulateTimeOpen": 30,
-        "simulateTimeClosing": 15
-    }]
+    "accessory": "SimpleGarageDoorOpener",
+    "name": "SimpleGarageDoorOpener",
+    "doorSwitchPin": 12,
+    "simulateTimeOpening": 15,
+    "simulateTimeClosing": 15,
+    "autoClosingDelay": 30
+}]
 ```
+
+#### *config.js* Options table
+
+| Option              | Description                                                                                                                   |  Type  | Notes about value(s)                                                          | Required | Default value                                                                   |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | :----: | ----------------------------------------------------------------------------- | :------: | ------------------------------------------------------------------------------- |
+| accessory           | Accessory identifier, unique value.                                                                                           | string | Only `"SimpleGarageDoorOpener"` must be used                                  |   YES    | None                                                                            |
+| verbose             | Shows more logs in Homebridge console                                                                                         |  bool  | -                                                                             |    NO    | `false`                                                                         |
+| name                | The name that your homekit application will show                                                                              | string | -                                                                             |    NO    | `"SimpleGarageDoorOpener"`                                                      |
+| doorSwitchPin       | GPIO PIN used to trigger your garage door                                                                                     | number | -                                                                             |    NO    | `12`                                                                            |
+| simulateTimeOpening | Amount of time your garage door takes to be fully open (in seconds)                                                           | number | -                                                                             |    NO    | `15`                                                                            |
+| simulateTimeClosing | Amount of time your garage door takes to be fully closed (in seconds)                                                         | number | -                                                                             |    NO    | `15`                                                                            |
+| autoClosingMode     | Different modes to handle garage door autoclosing                                                                             | string | Modes are `"none"` `"auto"` `"force"` (see below for information about modes) |    NO    | `"none"`                                                                        |
+| autoClosingDelay    | Time for your garage to initiate autoclosing in seconds (`"auto"` and `"force"` modes only)                                   | number | -                                                                             |    NO    | `30`                                                                            |
+| initialGPIOMode     | GPIO mode used at start when opening connection between plugin and GPIO pin                                                   | string | GPIO modes can be `"INPUT"` `"OUTPUT"`                                        |    NO    | `"INPUT"`                                                                       |
+| initialGPIOValue    | GPIO value used at start when opening connection between plugin and GPIO pin (only for `"INPUT"` mode)                        | string | GPIO values can be `"LOW"` `"HIGH"`                                           |    NO    | `"LOW"`                                                                         |
+| GPIOActionDelay     | Delay to wait between 2 GPIO actions (in seconds)                                                                             | number | -                                                                             |    NO    | `0.5`                                                                           |
+| GPIOOpenActions     | Actions to perform in order to trigger the garage door. A delay of `GPIOActionDelay` seconds is effective between each action | array  | Array of Objects (see object definition below)                                |    NO    | `[{ "type": "mode", "value": "OUTPUT" }, { "type": "mode", "value": "INPUT" }]` |
+
+
+**autoClosingMode** option:
+| Value | Description                                                                                                                                             |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| none  | Autoclosing disabled, nothing will be done                                                                                                              |
+| auto  | Your garage door is self-autoclosing. The `autoClosingDelay` will be then used to give HomeKit an estimation about when your garage door is autoclosing |
+| force | Your garage door is **NOT** self-autoclosing, Homebridge will force closing after `autoClosingDelay` seconds                                            |
+
+**GPIOOpenActions** option, object definition:
+| Value | Description                                                                                                                                                                                                 |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type  | Type of action that rpio will perform, possible values are `"mode"` or `"write"`                                                                                                                            |
+| value | Value that will be send to rpio when calling the function defined by `type` above. If `type` is `"mode"`, values can be `"INPUT"` or `"OUTPUT"`. If `type` is `"WRITE"`, values can be `"HIGH"` or `"LOW"`. |
 
 #### Misc
 Feel free to give me feedback, create PRs or submit issues, enhancements and bugs.
