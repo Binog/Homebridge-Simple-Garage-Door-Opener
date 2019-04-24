@@ -44,8 +44,8 @@ class SimpleGarageDoorOpener {
 
     this.GPIOActionDelay = config['GPIOActionDelay'] || 0.5;
     this.GPIOOpenActions = config['GPIOOpenActions'] || [
-      { "write": rpio.HIGH },
-      { "write": rpio.LOW }
+      { type: "mode", value: "OUTPUT" },
+      { type: "mode", value: "INPUT" }
     ];
 
     this.sanitizeConfig();
